@@ -1,0 +1,11 @@
+This project bundles data from OmnesViae (https://omnesviae.org).
+
+    data/omnesviae.json
+
+OmnesViae is Copyright (c) 2024 Rene Voorburg and distributed under the MIT
+License; the full text is in data/omnesviae.LICENSE. The dataset derives from
+the Tabula Peutingeriana and the Antonine Itinerary (ancient, public domain).
+
+All SVG/vector artwork in this repository is original to the Gens Togata
+project. The visual style is inspired by the Tabula Peutingeriana, which is a
+medieval copy of a late-Roman original and is in the public domain.
