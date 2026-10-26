@@ -21,10 +21,40 @@
   <g id="columna">
     <circle r="3.1" fill="#3a2a14"/><circle r="1.4" fill="#efe3c6"/>
   </g>
+  <filter id="rough" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013 0.017" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="roughmap" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.016 0.02" numOctaves="3" seed="5" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="mottle">
+    <feTurbulence type="fractalNoise" baseFrequency="0.009 0.013" numOctaves="4" seed="8" result="t"/>
+    <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.31  0 0 0 0 0.15  0 0 0 1.4 -0.55"/>
+  </filter>
+  <radialGradient id="age" cx="50%" cy="46%" r="75%">
+    <stop offset="50%" stop-color="#6e4a1b" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#4e3312" stop-opacity="0.44"/>
+  </radialGradient>
+  <radialGradient id="stain" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#6b4a1e" stop-opacity="0.26"/>
+    <stop offset="65%" stop-color="#6b4a1e" stop-opacity="0.09"/>
+    <stop offset="100%" stop-color="#6b4a1e" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 <rect width="1180" height="300" fill="#efe3c6"/>
-<rect x="10" y="10" width="1160" height="280" fill="none" stroke="#6e1b1b" stroke-width="2"/>
-<rect x="15" y="15" width="1150" height="270" fill="none" stroke="#6e1b1b" stroke-width="0.6"/>
+<rect width="1180" height="300" filter="url(#mottle)" opacity="0.5"/>
+<circle cx="735" cy="25" r="16" fill="url(#stain)"/>
+<circle cx="303" cy="212" r="24" fill="url(#stain)"/>
+<circle cx="997" cy="41" r="19" fill="url(#stain)"/>
+<circle cx="102" cy="76" r="20" fill="url(#stain)"/>
+<circle cx="98" cy="70" r="23" fill="url(#stain)"/>
+<circle cx="637" cy="76" r="22" fill="url(#stain)"/>
+<circle cx="911" cy="20" r="26" fill="url(#stain)"/>
+<circle cx="796" cy="108" r="14" fill="url(#stain)"/>
+<g filter="url(#roughmap)">
+<rect x="12" y="12" width="1156" height="276" fill="none" stroke="#6e1b1b" stroke-width="2.2"/><rect x="17" y="17" width="1146" height="266" fill="none" stroke="#6e1b1b" stroke-width="0.7"/>
 <text x="590.0" y="46" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="16" fill="#6e1b1b" text-anchor="middle" letter-spacing="2.5" style="text-transform:uppercase">Itinerarivm</text>
 <text x="590.0" y="62" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="8.5" fill="#2a1d0c" text-anchor="middle" font-style="italic" letter-spacing="1">Roma ad Capua · 83 leugae</text>
 <path d="M 90.0 168.0 L 145.5 168.0 L 152.5 159.0 L 159.5 168.0 L 215.0 168.0 L 270.5 168.0 L 277.5 159.0 L 284.5 168.0 L 340.0 168.0 L 395.5 168.0 L 402.5 159.0 L 409.5 168.0 L 465.0 168.0 L 520.5 168.0 L 527.5 159.0 L 534.5 168.0 L 590.0 168.0 L 645.5 168.0 L 652.5 159.0 L 659.5 168.0 L 715.0 168.0 L 770.5 168.0 L 777.5 159.0 L 784.5 168.0 L 840.0 168.0 L 895.5 168.0 L 902.5 159.0 L 909.5 168.0 L 965.0 168.0 L 1020.5 168.0 L 1027.5 159.0 L 1034.5 168.0 L 1090.0 168.0" fill="none" stroke="#6e1b1b" stroke-width="2.6" stroke-linejoin="round"/>
@@ -109,4 +139,6 @@
 <text x="1090.0" y="202.0" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="7" fill="#8a5a12" text-anchor="middle" font-style="italic">Capua</text>
 <text x="590.0" y="276" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="7.5" fill="#2a1d0c" text-anchor="middle" letter-spacing="0.8" opacity="0.85">distances in leugae (Gallic leagues) · schematic, not to geographic scale — after the Tabula Peutingeriana</text>
 <text x="590.0" y="287" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="6.5" fill="#2a1d0c" text-anchor="middle" opacity="0.6">data: OmnesViae © René Voorburg (MIT) · Gens Togata diegetic visual language</text>
+</g>
+<rect width="1180" height="300" fill="url(#age)"/>
 </svg>

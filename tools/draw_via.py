@@ -88,9 +88,6 @@ def twin_tower(x, y, big=False):
     return "\n".join(g)
 
 parts = []
-parts.append(f'<rect width="{W}" height="{H}" fill="{PARCH}"/>')
-parts.append(f'<rect x="10" y="10" width="{W-20}" height="{H-20}" fill="none" stroke="{ACCENT}" stroke-width="2"/>')
-parts.append(f'<rect x="15" y="15" width="{W-30}" height="{H-30}" fill="none" stroke="{ACCENT}" stroke-width="0.6"/>')
 # title
 parts.append(f'<text x="{W/2}" y="46" font-family="{SERIF}" font-size="16" fill="{ACCENT}" '
              f'text-anchor="middle" letter-spacing="2.5" style="text-transform:uppercase">Itinerarivm</text>')
@@ -133,7 +130,6 @@ parts.append(f'<text x="{W/2}" y="{H-24}" font-family="{SERIF}" font-size="7.5" 
 parts.append(f'<text x="{W/2}" y="{H-13}" font-family="{SERIF}" font-size="6.5" fill="{INK}" '
              f'text-anchor="middle" opacity="0.6">data: OmnesViae \u00a9 Ren\u00e9 Voorburg (MIT) \u00b7 Gens Togata diegetic visual language</text>')
 
-svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">\n'
-       f'{R.defs()}\n' + "\n".join(parts) + "\n</svg>")
+svg = R.page(W, H, "\n".join(parts), rough="roughmap")
 open(os.path.join(HERE, "..", "via.svg"), "w").write(svg)
 print("wrote via.svg")

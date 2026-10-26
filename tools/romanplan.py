@@ -47,7 +47,40 @@ def defs():
   <g id="columna">
     <circle r="3.1" fill="{POCHE}"/><circle r="1.4" fill="{PARCH}"/>
   </g>
+  <filter id="rough" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013 0.017" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="roughmap" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.016 0.02" numOctaves="3" seed="5" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="mottle">
+    <feTurbulence type="fractalNoise" baseFrequency="0.009 0.013" numOctaves="4" seed="8" result="t"/>
+    <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.31  0 0 0 0 0.15  0 0 0 1.4 -0.55"/>
+  </filter>
+  <radialGradient id="age" cx="50%" cy="46%" r="75%">
+    <stop offset="50%" stop-color="#6e4a1b" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#4e3312" stop-opacity="0.44"/>
+  </radialGradient>
+  <radialGradient id="stain" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#6b4a1e" stop-opacity="0.26"/>
+    <stop offset="65%" stop-color="#6b4a1e" stop-opacity="0.09"/>
+    <stop offset="100%" stop-color="#6b4a1e" stop-opacity="0"/>
+  </radialGradient>
 </defs>"""
+
+
+def stainblobs(w, h, seed=42, n=8):
+    import random
+    rnd = random.Random(seed)
+    out = []
+    for _ in range(n):
+        cx = rnd.uniform(0.06, 0.94) * w
+        cy = rnd.uniform(0.06, 0.94) * h
+        r = rnd.uniform(0.035, 0.10) * min(w, h)
+        out.append(f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{r:.0f}" fill="url(#stain)"/>')
+    return "\n".join(out)
 
 
 def X(p, x0): return x0 + p * PES
@@ -166,11 +199,15 @@ def groma(cx, cy, r=18):
     return "\n".join(s)
 
 
-def page(w, h, inner):
+def page(w, h, inner, rough="rough"):
+    border = (f'<rect x="12" y="12" width="{w-24}" height="{h-24}" fill="none" '
+              f'stroke="{ACCENT}" stroke-width="2.2"/>'
+              f'<rect x="17" y="17" width="{w-34}" height="{h-34}" fill="none" '
+              f'stroke="{ACCENT}" stroke-width="0.7"/>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" '
             f'width="{w}" height="{h}">\n{defs()}\n'
             f'<rect width="{w}" height="{h}" fill="{PARCH}"/>\n'
-            f'<rect x="10" y="10" width="{w-20}" height="{h-20}" fill="none" '
-            f'stroke="{ACCENT}" stroke-width="2"/>\n'
-            f'<rect x="15" y="15" width="{w-30}" height="{h-30}" fill="none" '
-            f'stroke="{ACCENT}" stroke-width="0.6"/>\n{inner}\n</svg>')
+            f'<rect width="{w}" height="{h}" filter="url(#mottle)" opacity="0.5"/>\n'
+            f'{stainblobs(w, h)}\n'
+            f'<g filter="url(#{rough})">\n{border}\n{inner}\n</g>\n'
+            f'<rect width="{w}" height="{h}" fill="url(#age)"/>\n</svg>')

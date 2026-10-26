@@ -21,10 +21,40 @@
   <g id="columna">
     <circle r="3.1" fill="#3a2a14"/><circle r="1.4" fill="#efe3c6"/>
   </g>
+  <filter id="rough" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013 0.017" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="roughmap" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.016 0.02" numOctaves="3" seed="5" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="mottle">
+    <feTurbulence type="fractalNoise" baseFrequency="0.009 0.013" numOctaves="4" seed="8" result="t"/>
+    <feColorMatrix in="t" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.31  0 0 0 0 0.15  0 0 0 1.4 -0.55"/>
+  </filter>
+  <radialGradient id="age" cx="50%" cy="46%" r="75%">
+    <stop offset="50%" stop-color="#6e4a1b" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#4e3312" stop-opacity="0.44"/>
+  </radialGradient>
+  <radialGradient id="stain" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#6b4a1e" stop-opacity="0.26"/>
+    <stop offset="65%" stop-color="#6b4a1e" stop-opacity="0.09"/>
+    <stop offset="100%" stop-color="#6b4a1e" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 <rect width="940" height="1240" fill="#efe3c6"/>
-<rect x="10" y="10" width="920" height="1220" fill="none" stroke="#6e1b1b" stroke-width="2"/>
-<rect x="15" y="15" width="910" height="1210" fill="none" stroke="#6e1b1b" stroke-width="0.6"/>
+<rect width="940" height="1240" filter="url(#mottle)" opacity="0.5"/>
+<circle cx="585" cy="102" r="50" fill="url(#stain)"/>
+<circle cx="241" cy="878" r="74" fill="url(#stain)"/>
+<circle cx="794" cy="169" r="59" fill="url(#stain)"/>
+<circle cx="81" cy="313" r="64" fill="url(#stain)"/>
+<circle cx="78" cy="291" r="73" fill="url(#stain)"/>
+<circle cx="507" cy="315" r="69" fill="url(#stain)"/>
+<circle cx="726" cy="81" r="82" fill="url(#stain)"/>
+<circle cx="634" cy="446" r="42" fill="url(#stain)"/>
+<g filter="url(#rough)">
+<rect x="12" y="12" width="916" height="1216" fill="none" stroke="#6e1b1b" stroke-width="2.2"/><rect x="17" y="17" width="906" height="1206" fill="none" stroke="#6e1b1b" stroke-width="0.7"/>
 <rect x="135.6" y="150.6" width="508.8" height="962.4" fill="#3a2a14"/>
 <rect x="164.4" y="179.4" width="141.6" height="141.6" fill="#efe3c6"/>
 <rect x="164.4" y="335.4" width="141.6" height="141.6" fill="#efe3c6"/>
@@ -151,4 +181,6 @@
 </g>
 <text x="470.0" y="1214" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="7.5" fill="#2a1d0c" text-anchor="middle" letter-spacing="0.8" opacity="0.8">Gens Togata · diegetic visual language · after the Tabula Peutingeriana</text>
 <text x="470.0" y="1224" font-family="'Gentium Book Basic','Times New Roman','DejaVu Serif',serif" font-size="6.5" fill="#2a1d0c" text-anchor="middle" opacity="0.6">route data: OmnesViae (CC-derived, MIT) · original vector art</text>
+</g>
+<rect width="940" height="1240" fill="url(#age)"/>
 </svg>
